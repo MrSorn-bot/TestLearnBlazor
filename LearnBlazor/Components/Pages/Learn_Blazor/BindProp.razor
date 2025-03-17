@@ -19,16 +19,16 @@ Price:@Product.Price
 <br />
 Product Properties
 <select @bind="selectedProp">
-    @foreach (var prop in Product.ProductProperties)
+    @foreach (var prop in Enum.GetValues(typeof( Days)))
     {
-        <option value="@prop.Key">@prop.Value</option>
+        <option value="@prop">@prop</option>
     }
 </select>
 
-<p>@selectedProp</p>
+<p>@((int)selectedProp)</p>
 @code {
-    private string selectedProp = "";
-
+    // private string selectedProp = "";
+    private Days selectedProp = 0;
 
     Product Product = new()
         {
@@ -37,12 +37,7 @@ Product Properties
             IsActive = true,
             Price = 222,
 
-            ProductProperties = new List<Models.Product_Prop>()
-        {
-            new Product_Prop{ Id =1 , Key="Color", Value="Red"},
-            new Product_Prop{ Id =2 , Key="Size", Value="20oz"},
-            new Product_Prop{ Id =3 , Key="Flavor", Value="Rose"},
-        }
+         
 
 
         };
