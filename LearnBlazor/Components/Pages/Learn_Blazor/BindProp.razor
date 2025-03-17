@@ -1,25 +1,51 @@
 ﻿@page "/learnblazor/bindprop"
 <h3>BindProp</h3>
 Name:@Product.Name
-<hr/>
-IsActive:@Product.IsActive
 <hr />
-<input type="number" @bind="@Product.Price"/>
+Product Status:@(Product.IsActive ? "Active" : "InActive")
+<br />
+IsActive:
+<input type="checkbox" @bind="@Product.IsActive" />
+<hr />
+<input type="number" @bind="@Product.Price" />
 <br />
 Price:@Product.Price
-<br/>
-<input type="number" @bind="@Product.Price" @bind:event="oninput"/>
+<br />
+<input type="number" @bind="@Product.Price" @bind:event="oninput" />
 <br />
 <input type="number" @bind-value="@Product.Price" @bind-value:event="oninput" />
-@code {
-    Product Product = new()
-    {
-        Id=1,
-        Name="product1",
-        IsActive=true,
-        Price=222
 
-    };
+<br />
+<br />
+Product Properties
+<select @bind="selectedProp">
+    @foreach (var prop in Product.ProductProperties)
+    {
+        <option value="@prop.Key">@prop.Value</option>
+    }
+</select>
+
+<p>@selectedProp</p>
+@code {
+    private string selectedProp = "";
+
+
+    Product Product = new()
+        {
+            Id = 1,
+            Name = "product1",
+            IsActive = true,
+            Price = 222,
+
+            ProductProperties = new List<Models.Product_Prop>()
+        {
+            new Product_Prop{ Id =1 , Key="Color", Value="Red"},
+            new Product_Prop{ Id =2 , Key="Size", Value="20oz"},
+            new Product_Prop{ Id =3 , Key="Flavor", Value="Rose"},
+        }
+
+
+        };
 
 
 }
