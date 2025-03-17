@@ -29,15 +29,43 @@
         This Product is : @(Product.IsActive ? "Active" : "InActive") <br />
 
 
-        <br />
+        <br/>
         Selected Prop : @selectedProp
         @if (!string.IsNullOrEmpty(selectedProp))
         {
             <p>Selected Value : @Product.ProductProperties.FirstOrDefault(u => u.Key == selectedProp).Value</p>
         }
-
+       
 
     </div>
+</div>
+
+<div class="col-12 p-4"><h1 class="text-bg-secondary">Product Table</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>IsAction</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Prop in ProductList)
+            {
+                <tr>
+                    <td> <input type="text" @bind="Prop.Name"/> </td>
+                    <td><input type="number" @bind="Prop.Price" /></td>
+                    <td><input type="checkbox" @bind="Prop.IsActive" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    @foreach (var prod in ProductList)
+    {
+        <p>Name:@prod.Name Price :@prod.Price [@(prod.IsActive ? "Active" : "InActive")]</p>
+    }
 </div>
 
 
