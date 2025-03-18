@@ -4,29 +4,16 @@
 
 
 <h2 class="text-primary">DemoProduct</h2>
+<h3>Favorite Count : @FavoriteCount</h3>
 <div class=" p-2 mt-2">
     <div class="row">
         @foreach (var prod in ProductList)
         {
-            <div class="bg-light border col-6">
-                <h4 class="text-secondary">Product - @prod.Id</h4>
-                Name - @prod.Name <br />
-                Show Properties :
-                <input type="checkbox" @bind="prod.IsActive" />
+            <IndividualProduct Prod="prod" OnFavoriteUpdated="FavoriteCountChange"/>
 
 
-                @if (prod.IsActive)
-                {
-                    @foreach (var prodProp in prod.ProductProperties)
-                    {
-                        <p>@prodProp.Key - @prodProp.Value</p>
-                    }
-                }
-               
+     
 
-                <br />
-                <input type="button" class="btn btn-danger" style="width:100px" value="Delete" />
-            </div>
         }
         <div class="row pt-4">
             <input type="button" class="btn btn-success" style="width:100px" value="Counter"
@@ -40,7 +27,7 @@
 
 
 @code {
-
+    public int FavoriteCount { get; set; } = 0;
     public int Count { get; set; } = 0;
 
     List<Product> ProductList = new();
@@ -81,6 +68,25 @@
     private void IncrementCount(int counter)
     {
         Count += counter;
+    }
+    private void RemoveProduct(int productId)
+    {
+        var prod = ProductList.FirstOrDefault(u => u.Id == productId);
+        if (prod != null)
+        {
+            ProductList.Remove(prod);
+        }
+    }
+    protected void FavoriteCountChange(bool isSelected)
+    {
+        if (isSelected)
+        {
+            FavoriteCount++;
+        }
+        else
+        {
+            FavoriteCount--;
+        }
     }
 
 }
