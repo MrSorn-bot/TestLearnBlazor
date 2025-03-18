@@ -18,11 +18,8 @@
 
 
     <br />
-    <DeleteButtonComponent ProductId="@prod.Id">
-
-
-    </DeleteButtonComponent>
-
+    <DeleteButtonComponent ProductId="@prod.Id" OnDelete="OnRemove" >
+     </DeleteButtonComponent>
 </div>
 @code {
     [Parameter]
@@ -31,6 +28,10 @@
     [Parameter]
     public EventCallback<bool> OnFavoriteUpdated { get; set; }//จากแม่
 
+    [Parameter]
+    public EventCallback<int> OnRemove { get; set; }//จากแม่
+
+  
   
     private async Task FavoriteUpdated(ChangeEventArgs args)// จากลุก 
     {

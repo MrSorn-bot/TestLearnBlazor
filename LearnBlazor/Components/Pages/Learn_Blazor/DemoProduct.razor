@@ -9,7 +9,9 @@
     <div class="row">
         @foreach (var prod in ProductList)
         {
-            <IndividualProduct Prod="prod" OnFavoriteUpdated="FavoriteCountChange"/>
+            <IndividualProduct Prod="prod" 
+                OnFavoriteUpdated="FavoriteCountChange"
+                               OnRemove="RemoveProduct" />
 
 
      
@@ -69,6 +71,7 @@
     {
         Count += counter;
     }
+
     private void RemoveProduct(int productId)
     {
         var prod = ProductList.FirstOrDefault(u => u.Id == productId);
@@ -77,6 +80,7 @@
             ProductList.Remove(prod);
         }
     }
+
     protected void FavoriteCountChange(bool isSelected)
     {
         if (isSelected)
