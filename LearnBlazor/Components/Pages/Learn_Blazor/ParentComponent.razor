@@ -1,7 +1,8 @@
 ﻿@page "/learnBlazor/parentComponent"
 
 <h3>ParentComponent</h3>
-<CascadingValue Value="@MessageForGrandChildTemp" >
+<CascadingValue Value="@MessageForGrandChildTemp" Name="Message">
+    <CascadingValue Value="@LuckyNumber" Name="LuckyNumber">
 <_ChildComponent OnButtonClick=" ShowMessage" >
   
     <ChildSomeContent>Some Text between the Tags from Parent Component!!</ChildSomeContent>
@@ -12,7 +13,7 @@
     </ChildContent>
 </_ChildComponent>
 </CascadingValue>
-
+</CascadingValue>
 
 <p>@messageText</p>
 <_ChildComponent Title="This title is passed as a parameter from Parent Component">
@@ -20,7 +21,7 @@
 </_ChildComponent>
 
 @code {
-
+    private string LuckyNumber = "888";
     private string MessageForGrandChildTemp = "ข้อความจากพ่อแม่ให้หลางงงงง";
     public string messageText = "";
 
