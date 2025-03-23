@@ -1,0 +1,15 @@
+﻿<h3>_LifeCycleChildComponent</h3>
+@foreach (var item in EventType)
+{
+    <p>@item</p>
+    <hr />
+}
+
+@code {
+    List<string> EventType = new();
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        EventType.Add("เริ่มมมมme'komuj]^d ");
+    }
+}
